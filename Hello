@@ -1,0 +1,26 @@
+const {label, input, h1, hr, div, makeDOMDriver} = CycleDOM;
+
+function main(sources) {
+  
+  const input$ = sources.DOM.select('.name').events('input');
+  const val$ = input$.map( ev => ev.target.value).startWith('');
+  
+  const dom$ = val$.map( name => 
+      div([
+        label('Name:'),
+        input('.name',{type:'text'}),
+        hr(),
+        h1(`Hello ${name}!`),
+      ])
+    );
+  
+  return {
+    DOM: dom$
+  }
+}
+
+const drivers = {
+  DOM: makeDOMDriver('#app'),
+}
+
+Cycle.run(main, drivers);
