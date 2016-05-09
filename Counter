@@ -1,0 +1,34 @@
+const {label, button, input, h1, hr, div, makeDOMDriver} = CycleDOM;
+
+function main(sources) {
+  
+  const hover$ = sources.DOM.select('label').events('mouseover');
+  const hoverAction$ = hover$.map( e => 0);
+  
+  const add$ = sources.DOM.select('.add').events('click');
+  const addAction$ = add$.map(e => +1);
+  
+  const rest$ = sources.DOM.select('.rest').events('click');
+  const restAction$ = rest$.map(e => -1);
+  
+  const count$ = Rx.Observable.of(0)
+    .merge(addAction$).merge(restAction$).merge(hoverAction$)
+    .scan((x,y) => x + y);  
+  
+  return {
+    DOM: count$.map( count => 
+      div([
+        button('.add','Add'),
+        button('.rest','Rest'),
+        hr(),
+        label(String(count))
+      ])
+    )
+  }
+}
+
+const drivers = {
+  DOM: makeDOMDriver('#app'),
+}
+
+Cycle.run(main, drivers);
