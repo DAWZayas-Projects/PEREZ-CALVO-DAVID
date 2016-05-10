@@ -1,6 +1,3 @@
-
-
-<script>
 const {h, h1, div, label, input, button, hr, span, makeDOMDriver} = CycleDOM;
 
 function renderHello(val){
@@ -54,4 +51,3 @@ const drivers = {
 }
 
 Cycle.run(main, drivers);
-</script>
