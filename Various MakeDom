@@ -1,0 +1,57 @@
+
+
+<script>
+const {h, h1, div, label, input, button, hr, span, makeDOMDriver} = CycleDOM;
+
+function renderHello(val){
+  return div([
+        label('Name: '),
+        input('.name',{type: 'text'}),
+        hr(),
+        label('.label',`Hello ${val}!`),
+        hr(),
+      ]);
+}
+
+function renderTimer(i){
+  return div([
+         label(`Seconds elapsed ${i}`),
+         button('.reset', 'Reset Timer'),
+       ])
+}
+
+// Logic (functional)
+function main(sources) {
+  const mouseover$ = sources.Timer.select('.reset').events('click').startWith(null);
+  const input$ = sources.DOM.select('.name').events('input');
+  const val$ = input$.map(e => e.target.value).startWith('');
+  
+  const sinks = {
+    DOM:val$.map( val =>
+      renderHello(val)
+    ),
+    Log: Rx.Observable.timer(0, 2000).map(i => 2*i),
+    Timer: mouseover$
+      .startWith(null)
+      .flatMapLatest( () =>
+         Rx.Observable.timer(0, 2000).map(i => 
+           renderTimer(i)
+         )           
+       )
+  };
+  return sinks;
+}
+
+// Effects (imperative)
+function consoleLogDriver(msg$) {
+  msg$.subscribe(msg => console.log(msg));
+}
+
+const drivers = {
+  DOM: makeDOMDriver('.hello'),
+  Log: consoleLogDriver,
+  Timer: makeDOMDriver('.timer'),
+}
+
+Cycle.run(main, drivers);
+</script>
