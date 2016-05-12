@@ -1,5 +1,5 @@
 const {Observable} = Rx;
-const {div, p, img, span, h2, input, makeDOMDriver} = CycleDOM;
+const {div, p, img, span, h2, iframe, input, makeDOMDriver} = CycleDOM;
 
 function renderHeader() {
   return Observable.of(
@@ -37,6 +37,26 @@ function renderParagraf(obj){
   return Object.keys(obj).map( key => p(obj[key]));
 }
 
+function renderEx1(){
+  return Observable.of(
+      div('.cont', [
+       p('Hello it`s me'),
+      ])
+  );
+}
+
+function renderContent(sources) {
+  return sources.DOM.select('.check1').events('change')
+       .map(ev => ev.target.checked)
+       .startWith(false)
+       .map(toggled =>
+         div('.content',[
+           input('.check1',{type: 'checkbox'}), 'Show first example',
+           p(toggled ? renderEx1() : 'off')
+         ])
+       );
+}
+
 function main(sources) {
   
   const footer = {'0':{'0':'Lalalala', '1': 'lala'}, '1':{'0': 'Lelelele', '1': 'lele'} };
@@ -44,6 +64,7 @@ function main(sources) {
   const vtree$ = Observable.of(
       div([
         renderHeader(),
+        renderContent(sources),
         renderFooter(footer),
       ])
     );
@@ -56,4 +77,4 @@ function main(sources) {
 
 Cycle.run(main, {
   DOM: makeDOMDriver('#app')
-});
+},);
