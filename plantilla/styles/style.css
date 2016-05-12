@@ -1,0 +1,79 @@
+body{
+   font-family: "Merriweather", "Lora", "Georgia", serif;
+}
+
+.header{
+  text-align: center;
+  background-color: #24242D;
+  color: white;
+  padding-bottom: 7em;
+  padding-top: 7em;
+  width: 100%;
+  margin-bottom: 3em;
+}
+
+.title{
+  display: inline-block;
+  font-weight: bold;
+  font-size: 3em;
+  margin: 0 0 0 0.5em;
+}
+
+.logo{
+  max-width: 7em;
+  text-align: center;
+}
+
+.title-container{
+  display: inline-block;
+  margin: 2em;
+  text-align: center;
+}
+
+.body{
+  text-align: center;
+}
+
+.view-img{
+    max-width: 50%;
+    min-width: 10%;
+}
+
+pre{
+  font-family: monospace;
+  text-align: justify !important;
+}
+
+p{
+  font-size: 1.3em;
+}
+
+.footer{
+  text-align: center;
+  background-color: #24242D;
+  color: white;
+  padding-bottom: 2em;
+  padding-top: 2em;
+  width: 100%;
+  margin-top: 3em;
+  display: block;
+}
+
+.cont{
+  text-align: center;
+}
+
+a{
+  color: #409B9E;
+  border-bottom: 1px dotted #409B9E;
+}
+
+a:hover{
+  color: #409B9E;
+  border-bottom: 1px #409B9E;
+}
+
+a:visited{
+  color: #409B9E;
+  border-bottom: 1px dotted #409B9E;
+}
