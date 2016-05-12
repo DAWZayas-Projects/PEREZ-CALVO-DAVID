@@ -1,5 +1,5 @@
 const {Observable} = Rx;
-const {div, p, img, span, h2, iframe, input, makeDOMDriver} = CycleDOM;
+const {div, p, img, span, h2, hr, button, iframe, input, makeDOMDriver} = CycleDOM;
 
 function renderHeader() {
   return Observable.of(
@@ -37,12 +37,38 @@ function renderParagraf(obj){
   return Object.keys(obj).map( key => p(obj[key]));
 }
 
-function renderEx1(){
-  return Observable.of(
+function renderEx1(sources){
+  
+  const add$ = sources.DOM.select('.add').events('click');
+  const addAction$ = add$.map(e => +1);
+  
+  const rest$ = sources.DOM.select('.rest').events('click');
+  const restAction$ = rest$.map(e => -1);
+  
+  const count$ = Rx.Observable.of(0)
+    .merge(addAction$).merge(restAction$)
+    .scan((x,y) => x + y);
+  
+  return count$.map( count => 
+      div('.cont',[
+            h2('The counter is: '+String(count)),
+            hr(),
+            div('.btn-group',[
+              button('.add .btn .btn-primary',[
+                span('.glyphicon .glyphicon-plus')
+              ]),
+              button('.rest .btn .btn-danger',[
+                span('.glyphicon .glyphicon-minus')
+              ])
+            ])
+      ])
+    );
+  
+  /*return Observable.of(
       div('.cont', [
        p('Hello it`s me'),
       ])
-  );
+  );*/
 }
 
 function renderContent(sources) {
@@ -52,7 +78,7 @@ function renderContent(sources) {
        .map(toggled =>
          div('.content',[
            input('.check1',{type: 'checkbox'}), 'Show first example',
-           p(toggled ? renderEx1() : 'off')
+           p(toggled ? renderEx1(sources) : 'off')
          ])
        );
 }
