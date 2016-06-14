@@ -1,5 +1,6 @@
 import { h } from '@cycle/dom';
 import groupby from './groupBy';
+import { Rx } from '@cycle/core';
 
 export default function view(state$) {
     return state$.map(({products, cart}) => {

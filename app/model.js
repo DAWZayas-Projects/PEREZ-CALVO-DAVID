@@ -5,7 +5,6 @@ export default function model(actions){
     return Rx.Observable.just(example)
                     .combineLatest(actions.addToCart$.startWith(null),(state, newItem)=>{
                         state.cart = newItem ? state.cart.concat([newItem]) : state.cart;
-                        localStorage.setItem('cart', JSON.stringify(state.cart));
                         return state
                     });
 }
