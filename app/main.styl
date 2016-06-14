@@ -1,0 +1,82 @@
+@import 'node_modules/bootstrap-styl/bootstrap/'
+
+body
+	font-family: "Source Sans Pro", "Calibri", "Helvetica", sans-serif;
+.product:hover
+	cursor pointer
+
+header
+	background-color: #24242D
+	color: white
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1
+	vertical-align:middle
+
+.header
+	font-weight: bold
+	font-size: 4em
+	margin-top:2em
+
+.footer
+	text-align: center
+	background-color: #24242D
+	color: white
+	padding-bottom: 2em
+	padding-top: 2em
+	width: 100%
+	margin-top: 3em
+
+footer
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 1
+
+.product
+	border: 1px solid grey
+	border-radius: 5px;
+	margin: 0.5em
+	text-align: center
+	width: 160px
+	height: 190px
+
+.name
+	font-weight: bold
+
+.cartInfo
+	vertical-align:middle
+	text-align: center
+	float: right
+
+.cartImg
+	width: 3em
+	margin: 1em
+
+.imgProduct
+	width: 6em
+
+.catalog
+	position: relative;
+	top: 20vh;
+	z-index: 0
+
+.cart
+	display: none
+
+.cartInfo:hover .cart
+	padding: 1em
+	display: block
+	border: 1px solid grey
+	border-radius: 5px
+	position: absolute;
+	background-color: white
+	color: grey
+	top: 5em
+	right: 10em
+	z-index: 2
+
+.total
+	float: center
+	font-weight: bold

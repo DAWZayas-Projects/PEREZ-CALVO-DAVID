@@ -1,0 +1,42 @@
+{
+  "name": "CSGO-Skins",
+  "version": "0.0.1",
+  "description": "Shop CS:GO Skins",
+  "main": "index.js",
+  "scripts": {
+    "dirs": "mkdirp ./public/images ./public/styles ./public/scripts",
+    "images": "ncp ./app/images/ ./public/images",
+    "css": "stylus ./app/main.styl --out ./public/styles/styles.css",
+    "html": "jade ./app/index.jade -o ./public",
+    "start": "http-server ./public",
+    "prebuild": "npm run dirs && npm run html && npm run images && npm run css",
+    "build": "browserify -d ./app/index.js -t babelify > ./public/scripts/app.bundle.js"
+  },
+  "keywords": [
+    "ES6",
+    "Functional Reactive Programming",
+    "CycleJS"
+  ],
+  "author": "David Pérez",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "~5.8.21",
+    "babel-tape-runner": "~1.2.0",
+    "babelify": "~6.2.0",
+    "browserify": "~11.0.1",
+    "eslint": "^1.5.1",
+    "faucet": "0.0.1",
+    "glob": "^5.0.15",
+    "http-server": "~0.8.0",
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "stylus": "^0.52.0",
+    "tape": "~4.2.0"
+  },
+  "dependencies": {
+    "@cycle/core": "~3.1.0",
+    "@cycle/dom": "~5.0.1",
+    "bootstrap-styl": "^4.0.5",
+    "jade": "^1.11.0"
+  }
+}
