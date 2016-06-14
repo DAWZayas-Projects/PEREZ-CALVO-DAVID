@@ -10,7 +10,8 @@
     "html": "jade ./app/index.jade -o ./public",
     "start": "http-server ./public",
     "prebuild": "npm run dirs && npm run html && npm run images && npm run css",
-    "build": "browserify -d ./app/index.js -t babelify > ./public/scripts/app.bundle.js"
+    "build": "browserify -d ./app/index.js -t babelify > ./public/scripts/app.bundle.js",
+    "dev": "npm run build && npm start"
   },
   "keywords": [
     "ES6",
