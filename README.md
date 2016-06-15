@@ -8,7 +8,8 @@ Shopping cart application to show basic usage of Cycle.js framework features.
 ##Running
 
 `npm install`
-`npm run build && npm start`
+
+`npm run dev`
 
 ##Basic examples
 Hola Mundo: http://jsbin.com/luxahayuzi/edit?js,output
